@@ -1,14 +1,14 @@
 import os
-
+import copy
 import numpy as np
 import torch
 from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset, Subset
 import pandas as pd
 
 
-def test_model(model_name: str, model, loader: DataLoader, class_name):
+def test_model(model_name: str, model:torch.nn, loader: DataLoader, class_name:list[str]) -> pd.DataFrame:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(torch.cuda.get_device_name())
 
@@ -58,3 +58,36 @@ def test_model(model_name: str, model, loader: DataLoader, class_name):
     df = pd.DataFrame(cr_dict).T
 
     return df
+
+
+
+def test_on_given_idx(dataset, net_model, transform, idx):
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    net_model.to(device)
+    net_model.eval()
+
+    dataset_2 = copy.deepcopy(dataset)
+    dataset_idx = Subset(dataset_2, idx)
+    dataset_idx.dataset.transform = transform
+    loader = DataLoader(dataset_idx, batch_size=1, shuffle=False, num_workers=0)
+
+    preds = []
+
+    Data = {
+        'Idx': [],
+        'True_Label': [],
+        'Predicted_Label': []
+    }
+    for i, (img, label) in enumerate(loader):
+        Data['Idx'].append(idx[i])
+
+        img_tensor = img.to(device)
+        output = net_model(img_tensor)
+        pred = output.detach().cpu().numpy().argmax(axis=1)
+        pred_name = dataset.classes[pred[0]]
+
+        Data['True_Label'].append(dataset.classes[label.numpy()[0]])
+        Data['Predicted_Label'].append(pred_name)
+        preds.append(pred_name)
+
+    return preds, pd.DataFrame(Data)

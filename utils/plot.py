@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from torch.utils.data import Subset
 import  PIL.Image as Image
+import torchvision
 
 def plot_classes(set:Subset, class_names:list[str], set_name:str)->None:
 
@@ -22,7 +23,6 @@ def plot_classes(set:Subset, class_names:list[str], set_name:str)->None:
 def plot_random_six_images(set, class_names:list[str])->None:
     idx = np.random.choice(np.arange(start=0, stop=len(set)), size=6, replace=False)
     # idx = [1000, 10000, 15000, 20000, 200, 300]
-    print(idx)
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
     for i, k in enumerate(idx):
         img, class_num = set[k]
@@ -34,6 +34,23 @@ def plot_random_six_images(set, class_names:list[str])->None:
         ax.set_xlabel(class_names[class_num])
 
     return idx
+
+def plot_idx_labeled(idx, preds, dataset):
+    fig, axes = plt.subplots(2,3,figsize=(20, 8))
+    fig.subplots_adjust(top=1)
+
+    for i, k in enumerate(idx):
+        img, class_num = dataset[k]
+
+        img_show = Image.fromarray(np.array(img))
+        img_show = img_show.convert('RGB')
+        ax = axes[i//3][np.mod(i,3)]
+        ax.imshow(img_show)
+        ax.set_xlabel(f"Predicted_label: {preds[i]}\n"
+                      f"True_label: {dataset.classes[class_num]}")
+
+    return idx
+
 
 def plot_loss(train_loss:list[float], val_loss: list[float]) ->None:
     plt.plot(train_loss, label="Train Loss", color='blue')
