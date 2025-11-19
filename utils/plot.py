@@ -110,3 +110,4 @@ def plot_with_function(idx, preds, dataset, func, transform):
         at = ax.imshow(attribution_show, cmap='plasma',alpha=0.7, interpolation='none', vmin=0, vmax=attribution_show.max())
         ax.set_xlabel(f"Predicted_label: {dataset.classes[preds[i][0]]}\n"
                       f"True_label: {dataset.classes[class_num]}")
+
