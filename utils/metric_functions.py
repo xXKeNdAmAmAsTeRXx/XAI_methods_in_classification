@@ -5,10 +5,10 @@ import torch
 from matplotlib import pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score
 from torch.utils.data import DataLoader
+import pandas as pd
 
 
 def test_model(model_name: str, model, loader: DataLoader, class_name):
-    model.load_state_dict(torch.load(os.path.join('models', f"{model_name}.pth")))
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(torch.cuda.get_device_name())
 
@@ -42,8 +42,19 @@ def test_model(model_name: str, model, loader: DataLoader, class_name):
         ylabel="True label",
         xlabel="Predicted label"
     )
-    plt.setp(ax.get_xticklabels(), rotation=45, ha="right", rotation_mode="anchor")
     plt.show()
 
-    cr = classification_report(trues, preds, target_names=class_name)
-    print(cr)
+    # cr = classification_report(trues, preds, target_names=class_name, labels=np.arange(len(class_name)))
+    # print(cr)
+
+    cr_dict = classification_report(
+        trues,
+        preds,
+        target_names=class_name,
+        labels=np.arange(len(class_name)),
+        output_dict=True
+    )
+
+    df = pd.DataFrame(cr_dict).T
+
+    return df
