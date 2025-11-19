@@ -33,6 +33,8 @@ def plot_random_six_images(set, class_names:list[str])->None:
         ax.imshow(img_show)
         ax.set_xlabel(class_names[class_num])
 
+    return idx
+
 def plot_loss(train_loss:list[float], val_loss: list[float]) ->None:
     plt.plot(train_loss, label="Train Loss", color='blue')
     plt.plot(val_loss, label="Validation Loss", color='red')
