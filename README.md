@@ -1,6 +1,7 @@
 # Intro
 This repository contains an overview of XAI (Explainable AI) in classification problem. The main idea of this project is summing up 
-the most popular methods with not overcomplicated example.
+the most popular methods with not overcomplicated example. For this specific example I decided to fine tune pretrained resnet18 model from torch. 
+Fine-tuning was performed on forth layer and fully connected layer (fc).  
 
 
 ## Dataset
