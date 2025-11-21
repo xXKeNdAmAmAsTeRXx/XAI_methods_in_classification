@@ -1,5 +1,6 @@
 # Intro
-This repository contains a gradCAM method in explainable AI.
+This repository contains an overview of XAI (Explainable AI) in classification problem. The main idea of this project is summing up 
+the most popular methods with not overcomplicated example.
 
 
 ## Dataset
@@ -12,10 +13,24 @@ Originally from http://vision.stanford.edu/aditya86/ImageNetDogs/
 
 
 ## ResNet
+All methods in this repository are used to explain decision of ResNet architecture.
+
 ![img_1.png](assets/resnet.png)
-ResNet architecture is Convolutional Neural Network (CNN) architecture in which layers learn residual function with reference to the layer inputs.
+ResNet is Convolutional Neural Network (CNN) architecture in which layers learn residual function with reference to the layer inputs.
 In this repo I decided to use ResNet18(the smallest version of ResNets) as model performance optimization is not the main purpose. 
 
 More about ResNet in following paper: https://arxiv.org/abs/1512.03385
 
 
+# Gradient Based Methods
+Soon, here I will introduce following gradient methods.
+
+## Gradient-weighted Class Activation Mapping (GradCAM)
+
+
+Read more: https://arxiv.org/abs/1610.02391
+
+## Integrated Gradients
+
+
+Read more: https://arxiv.org/abs/1703.01365
