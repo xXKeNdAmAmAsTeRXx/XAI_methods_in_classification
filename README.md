@@ -28,13 +28,16 @@ Soon, here I will introduce following gradient methods.
 
 ## Gradient-weighted Class Activation Mapping (GradCAM)
 ![img.png](assets/Mypug.png)
-
+ 
 On this figure you can see GradCAM visualisation of ResNet 18 classifying my dog Klopsia correctly as pug.
 The GradCAM algorithm was performed on layer4 as it was the layer fine tuned for this specific classification problem.
 
 Read more: https://arxiv.org/abs/1610.02391
 
 ## Integrated Gradients
+![img.png](assets/MyPug2.png)
 
+On this figure you can see Integrated Gradients method performed with the whole fine tuned resnet18 as a forward function.
+This method gives us more overall idea of what influenced model decision.
 
 Read more: https://arxiv.org/abs/1703.01365
