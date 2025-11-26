@@ -49,7 +49,7 @@ def plot_idx_labeled(idx, preds, dataset):
         img_show = img_show.convert('RGB')
         ax = axes[i//3][np.mod(i,3)]
         ax.imshow(img_show)
-        ax.set_xlabel(f"Predicted_label: {preds[i]}\n"
+        ax.set_xlabel(f"Predicted_label: {dataset.classes[preds[i][0]]}\n"
                       f"True_label: {dataset.classes[class_num]}")
 
     return idx
