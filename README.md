@@ -50,4 +50,5 @@ Occlusion is a permutation methods for explaining CNNs for classification tasks.
 image to predict multiple times each time covering different part of input image along with target prediction. Basing on target class
 probability the algorithm calculates the heat map of area importance in prediction.
 
+Read more: https://arxiv.org/abs/1311.2901
 
