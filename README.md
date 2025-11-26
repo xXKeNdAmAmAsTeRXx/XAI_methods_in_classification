@@ -26,7 +26,7 @@ More about ResNet in following paper: https://arxiv.org/abs/1512.03385
 # Gradient Based Methods
 Soon, here I will introduce following gradient methods.
 
-## Gradient-weighted Class Activation Mapping (GradCAM)
+## Guided Gradient-weighted Class Activation Mapping (GradCAM)
 ![img.png](assets/Mypug.png)
  
 On this figure you can see GradCAM visualisation of ResNet 18 classifying my dog Klopsia correctly as pug.
@@ -41,3 +41,13 @@ On this figure you can see Integrated Gradients method performed with the whole 
 This method gives us more overall idea of what influenced model decision.
 
 Read more: https://arxiv.org/abs/1703.01365
+
+# Occlusion
+
+![img.png](assets/OcclusionPug.png)
+
+Occlusion is a permutation methods for explaining CNNs for classification tasks. In this method we give net model 
+image to predict multiple times each time covering different part of input image along with target prediction. Basing on target class
+probability the algorithm calculates the heat map of area importance in prediction.
+
+
