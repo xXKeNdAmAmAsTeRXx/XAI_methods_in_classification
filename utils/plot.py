@@ -111,3 +111,42 @@ def plot_with_function(idx, preds, dataset, func, transform):
         ax.set_xlabel(f"Predicted_label: {dataset.classes[preds[i][0]]}\n"
                       f"True_label: {dataset.classes[class_num]}")
 
+def plot_occlusion(idx, preds, dataset, func, transform, window_size=5):
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    fig, axes = plt.subplots(2,3,figsize=(20, 8))
+    fig.subplots_adjust(top=1)
+
+    for i, k in enumerate(idx):
+        img, class_num = dataset[k]
+        img_tensor = (transform(img).unsqueeze(0)).to(device)
+        img_tensor.requires_grad_(True)
+
+        # Calculating Grad Cam
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=UserWarning)
+            attribution = func(img_tensor, target=int(preds[i][0]), sliding_window_shapes=(3, window_size, window_size))
+
+        attribution_np = attribution.detach().cpu().numpy()
+        attribution_np = np.max(np.abs(attribution_np), axis=0)
+        img_tensor.detach()
+
+        min_val = np.min(attribution_np)
+        max_val = np.max(attribution_np)
+
+        if max_val > min_val:
+            attribution_np = (attribution_np - min_val) / (max_val - min_val)
+
+        attribution_show = attribution_np[0]
+
+        # Getting and resizng orginal image
+        original_img, _ = dataset[k]
+        img_show = Image.fromarray(np.array(original_img))
+        img_show = img_show.convert('RGB')
+        img_show = img_show.resize(size=(224,224))
+
+
+        ax = axes[i//3][np.mod(i,3)]
+        ax.imshow(img_show)
+        at = ax.imshow(attribution_show, cmap='plasma',alpha=0.7, interpolation='none', vmin=0, vmax=attribution_show.max())
+        ax.set_xlabel(f"Predicted_label: {dataset.classes[preds[i][0]]}\n"
+                      f"True_label: {dataset.classes[class_num]}")
