@@ -41,7 +41,8 @@ Read more: https://arxiv.org/abs/1610.02391
 ![img.png](assets/MyPug2.png)
 
 On this figure you can see Integrated Gradients method performed with the whole fine tuned resnet18 as a forward function.
-This method gives us more overall idea of what influenced model decision.
+This method gives us more overall idea of what influenced model decision. Long story short ingradient gradient are an importance score for each
+input pixel given by approximation of the integral of gradients of the model's output with respect to the input. 
 
 Read more: https://arxiv.org/abs/1703.01365
 
