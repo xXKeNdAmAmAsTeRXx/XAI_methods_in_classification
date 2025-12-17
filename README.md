@@ -78,4 +78,4 @@ by comprehension of prediction with and without this specific feature. In this s
 any 2x2 pixel square as feature and absence of this feature is marked by blur-ing it.
 
 In this is specific example I used [SHAP library](https://shap.readthedocs.io/en/latest/index.html).
-Read More: https://link.springer.com/article/10.1007/s10115-013-0679-x
+<br/>Read More: https://link.springer.com/article/10.1007/s10115-013-0679-x
