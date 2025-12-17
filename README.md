@@ -62,3 +62,20 @@ probability the algorithm calculates the heat map of area importance in predicti
 
 Read more: https://arxiv.org/abs/1311.2901
 
+# Post-hoc agnostic methods
+**Post-hoc** methods is a family of methods that explain model locally meaning in specific prediction.
+
+**Agnostic** methods are these that could be used for any model architecture or even purpose.
+For this model we only need to mark specific features that could be used for fitting any explainable model or method.
+
+
+## Shapley Values
+![img.png](assets/shap.png)
+
+The shapley values is term from game theory. This values calculates how much each
+feature contributed to model output. The algorithm calculates specific feature contribution
+by comprehension of prediction with and without this specific feature. In this specific example I treat 
+any 2x2 pixel square as feature and absence of this feature is marked by blur-ing it.
+
+In this is specific example I used [SHAP library](https://shap.readthedocs.io/en/latest/index.html).
+Read More: https://link.springer.com/article/10.1007/s10115-013-0679-x
