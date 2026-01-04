@@ -1,16 +1,19 @@
-import os
 import copy
+from typing import List, Tuple, Any
+
 import numpy as np
+from matplotlib import pyplot as plt
+from numpy.typing import NDArray
 import torch
 import torchvision
-from matplotlib import pyplot as plt, transforms
-from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
-from torch.utils.data import DataLoader, Subset
+from torchvision import transforms
+from torch.utils.data import DataLoader, Subset, Dataset
 import torch.nn.functional as F
 import pandas as pd
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 
 
-def test_model(model_name: str, model:torchvision.models.resnet.ResNet, loader: DataLoader, class_name:list[str]) -> pd.DataFrame:
+def test_model(model_name: str, model: torchvision.models.resnet.ResNet, loader: DataLoader, class_name: List[str]) -> pd.DataFrame:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(torch.cuda.get_device_name())
 
@@ -63,7 +66,7 @@ def test_model(model_name: str, model:torchvision.models.resnet.ResNet, loader: 
 
 
 
-def test_on_given_idx(dataset, net_model, transform, idx):
+def test_on_given_idx(dataset: Dataset, net_model: torch.nn.Module, transform: transforms.Compose, idx: NDArray[np.int32]) -> Tuple[List[NDArray[np.int32]], pd.DataFrame]:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     net_model.to(device)
     net_model.eval()
@@ -94,7 +97,7 @@ def test_on_given_idx(dataset, net_model, transform, idx):
 
     return preds, pd.DataFrame(Data)
 
-def get_top_k_predictions(probs:np.ndarray, labels:np.ndarray, k:int) -> pd.DataFrame:
+def get_top_k_predictions(probs: NDArray[np.float32], labels: List[str], k: int) -> pd.DataFrame:
     top_k_indices = np.argsort(probs)[-k:][::-1]
     top_k_names = [labels[i] for i in top_k_indices]
     top_k_scores = [probs[i] for i in top_k_indices]
@@ -108,7 +111,7 @@ def get_top_k_predictions(probs:np.ndarray, labels:np.ndarray, k:int) -> pd.Data
 
     return probs_df
 
-def batch_predict_probs(images:np.ndarray, net_model:torchvision.models.resnet.ResNet) -> np.ndarray:
+def batch_predict_probs(images: NDArray[Any], net_model: torchvision.models.resnet.ResNet) -> NDArray[np.float32]:
     mean = [0.485, 0.456, 0.406]
     std = [0.229, 0.224, 0.225]
 
