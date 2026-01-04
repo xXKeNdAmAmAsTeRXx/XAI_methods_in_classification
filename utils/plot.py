@@ -73,7 +73,7 @@ def plot_time(epoch_time: list[float]) -> None:
     plt.ylabel('Time')
     plt.show()
 
-def plot_with_function(idx: np.ndarray[Any, np.dtype[np.int32]], preds: torch.Tensor, dataset: Any, func: Callable, transform: Callable) -> None:
+def plot_with_function(idx: np.ndarray[Any, np.dtype[np.int32]], preds: list[ndarray[tuple[int, ...], dtype[signedinteger[_32Bit]]]], dataset: Any, func: Callable, transform: Callable) -> None:
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
     fig.subplots_adjust(top=1)
