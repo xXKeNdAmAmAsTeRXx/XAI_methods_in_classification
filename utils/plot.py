@@ -1,13 +1,14 @@
 import warnings
+from typing import Any, Callable, List
 
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
 from torch.utils.data import Subset
-import  PIL.Image as Image
-import torchvision
+import PIL.Image as Image
 
-def plot_classes(set:Subset, class_names:list[str], set_name:str)->None:
+
+def plot_classes(set: Subset, class_names: List[str], set_name: str) -> None:
 
     img_per_class = dict(zip(class_names, np.zeros(len(class_names))))
     for i,class_num in set:
@@ -23,7 +24,7 @@ def plot_classes(set:Subset, class_names:list[str], set_name:str)->None:
 
 
 
-def plot_random_six_images(set, class_names:list[str])->None:
+def plot_random_six_images(set: Subset, class_names: list[str]) -> np.ndarray[Any, np.dtype[np.int32]]:
     idx = np.random.choice(np.arange(start=0, stop=len(set)), size=6, replace=False)
     # idx = [1000, 10000, 15000, 20000, 200, 300]
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
@@ -38,7 +39,7 @@ def plot_random_six_images(set, class_names:list[str])->None:
 
     return idx
 
-def plot_idx_labeled(idx, preds, dataset):
+def plot_idx_labeled(idx: np.ndarray[Any, np.dtype[np.int32]], preds: torch.Tensor, dataset: Any) -> np.ndarray[Any, np.dtype[np.int32]]:
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
     fig.subplots_adjust(top=1)
 
@@ -55,7 +56,7 @@ def plot_idx_labeled(idx, preds, dataset):
     return idx
 
 
-def plot_loss(train_loss:list[float], val_loss: list[float]) ->None:
+def plot_loss(train_loss: list[float], val_loss: list[float]) -> None:
     plt.plot(train_loss, label="Train Loss", color='blue')
     plt.plot(val_loss, label="Validation Loss", color='red')
     plt.title('Loss Curve')
@@ -64,14 +65,14 @@ def plot_loss(train_loss:list[float], val_loss: list[float]) ->None:
     plt.legend()
     plt.show()
 
-def plot_time(epoch_time:list[float])->None:
+def plot_time(epoch_time: list[float]) -> None:
     plt.plot(epoch_time, label="Epoch Time")
     plt.title('Epoch Time')
     plt.xlabel('Epoch')
     plt.ylabel('Time')
     plt.show()
 
-def plot_with_function(idx, preds, dataset, func, transform):
+def plot_with_function(idx: np.ndarray[Any, np.dtype[np.int32]], preds: torch.Tensor, dataset: Any, func: Callable, transform: Callable) -> None:
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
     fig.subplots_adjust(top=1)
@@ -111,7 +112,7 @@ def plot_with_function(idx, preds, dataset, func, transform):
         ax.set_xlabel(f"Predicted_label: {dataset.classes[preds[i][0]]}\n"
                       f"True_label: {dataset.classes[class_num]}")
 
-def plot_occlusion(idx, preds, dataset, func, transform, window_size=5):
+def plot_occlusion(idx: np.ndarray[Any, np.dtype[np.int32]], preds: torch.Tensor, dataset: Any, func: Callable, transform: Callable, window_size: int = 5) -> None:
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
     fig.subplots_adjust(top=1)
