@@ -4,6 +4,7 @@ from typing import Any, Callable, List
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
+from torchvision.datasets import ImageFolder
 from numpy._typing import _32Bit
 from torch.utils.data import Subset
 import PIL.Image as Image
@@ -73,7 +74,7 @@ def plot_time(epoch_time: list[float]) -> None:
     plt.ylabel('Time')
     plt.show()
 
-def plot_with_function(idx: np.ndarray[Any, np.dtype[np.int32]], preds: list[ndarray[tuple[int, ...], dtype[signedinteger[_32Bit]]]], dataset: Any, func: Callable, transform: Callable) -> None:
+def plot_with_function(idx: np.ndarray[Any, np.dtype[np.int32]], preds: list[np.ndarray[tuple[int, ...], np.dtype[np.signedinteger[_32Bit]]]], dataset: Any, func: Callable, transform: Callable) -> None:
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
     fig.subplots_adjust(top=1)
@@ -113,7 +114,7 @@ def plot_with_function(idx: np.ndarray[Any, np.dtype[np.int32]], preds: list[nda
         ax.set_xlabel(f"Predicted_label: {dataset.classes[preds[i][0]]}\n"
                       f"True_label: {dataset.classes[class_num]}")
 
-def plot_occlusion(idx: np.ndarray[Any, np.dtype[np.int32]], preds: list[ndarray[tuple[int, ...], dtype[signedinteger[_32Bit]]]], dataset: Any, func: Callable, transform: Callable, window_size: int = 5) -> None:
+def plot_occlusion(idx: np.ndarray[Any, np.dtype[np.int32]], preds: list[np.ndarray[tuple[int, ...], np.dtype[np.signedinteger[_32Bit]]]], dataset: Any, func: Callable, transform: Callable, window_size: int = 5) -> None:
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
     fig.subplots_adjust(top=1)
