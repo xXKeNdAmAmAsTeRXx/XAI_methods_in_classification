@@ -79,3 +79,16 @@ any 2x2 pixel square as feature and absence of this feature is marked by blur-in
 
 In this is specific example I used [SHAP library](https://shap.readthedocs.io/en/latest/index.html).
 <br/>Read More: https://link.springer.com/article/10.1007/s10115-013-0679-x
+
+## LIME (Local Interpretable Model-Agnostic Explanations)
+![LIME.png](assets/LIME.png)
+
+The LIME Explanations works by approximating model prediction with simpler (smaller) explainable models.
+In image data XAI  we create features by splitting image into "tiles" so-called superpixels
+(this specific library uses **quickshift** algorithm). 
+Then algorithm finds the most influencing superpixels by perturbation features our model predictions to create weights, 
+then we use simple interpretable model to obtain feature importance.
+
+In this is specific example I used [lime library](https://github.com/marcotcr/lime).
+<br/>Read More: https://arxiv.org/abs/1602.04938
+
