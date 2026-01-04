@@ -4,6 +4,7 @@ from typing import Any, Callable, List
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
+from numpy._typing import _32Bit
 from torch.utils.data import Subset
 import PIL.Image as Image
 
@@ -39,7 +40,7 @@ def plot_random_six_images(set: Subset, class_names: list[str]) -> np.ndarray[An
 
     return idx
 
-def plot_idx_labeled(idx: np.ndarray[Any, np.dtype[np.int32]], preds: torch.Tensor, dataset: Any) -> np.ndarray[Any, np.dtype[np.int32]]:
+def plot_idx_labeled(idx: np.ndarray[Any, np.dtype[np.int32]], preds: list[np.ndarray[tuple[int, ...], np.dtype[np.signedinteger[_32Bit]]]], dataset: Any) -> np.ndarray[Any, np.dtype[np.int32]]:
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
     fig.subplots_adjust(top=1)
 
