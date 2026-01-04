@@ -10,7 +10,7 @@ import torch.nn.functional as F
 import pandas as pd
 
 
-def test_model(model_name: str, model:torch.nn, loader: DataLoader, class_name:list[str]) -> pd.DataFrame:
+def test_model(model_name: str, model:torchvision.models.resnet.ResNet, loader: DataLoader, class_name:list[str]) -> pd.DataFrame:
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(torch.cuda.get_device_name())
 
