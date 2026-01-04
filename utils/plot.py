@@ -25,7 +25,7 @@ def plot_classes(set: Subset, class_names: List[str], set_name: str) -> None:
 
 
 
-def plot_random_six_images(set: Subset, class_names: list[str]) -> np.ndarray[Any, np.dtype[np.int32]]:
+def plot_random_six_images(set: Subset | ImageFolder, class_names: list[str]) -> np.ndarray[Any, np.dtype[np.int32]]:
     idx = np.random.choice(np.arange(start=0, stop=len(set)), size=6, replace=False)
     # idx = [1000, 10000, 15000, 20000, 200, 300]
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
@@ -113,7 +113,7 @@ def plot_with_function(idx: np.ndarray[Any, np.dtype[np.int32]], preds: torch.Te
         ax.set_xlabel(f"Predicted_label: {dataset.classes[preds[i][0]]}\n"
                       f"True_label: {dataset.classes[class_num]}")
 
-def plot_occlusion(idx: np.ndarray[Any, np.dtype[np.int32]], preds: torch.Tensor, dataset: Any, func: Callable, transform: Callable, window_size: int = 5) -> None:
+def plot_occlusion(idx: np.ndarray[Any, np.dtype[np.int32]], preds: list[ndarray[tuple[int, ...], dtype[signedinteger[_32Bit]]]], dataset: Any, func: Callable, transform: Callable, window_size: int = 5) -> None:
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     fig, axes = plt.subplots(2,3,figsize=(20, 8))
     fig.subplots_adjust(top=1)
