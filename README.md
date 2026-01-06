@@ -27,7 +27,7 @@ More about ResNet in following paper: https://arxiv.org/abs/1512.03385
 Soon, here I will introduce following gradient methods.
 
 ## Guided Gradient-weighted Class Activation Mapping (GradCAM)
-![img.png](assets/Mypug.png)
+![img.png](assets/GuidedGradCAM.png)
  
 On this figure you can see Guided GradCAM visualisation of ResNet 18 classifying my dog Klopsia correctly as pug.
 The Guided GradCAM algorithm was performed on layer4 as it was the layer fine tuned for this specific classification problem.
@@ -38,7 +38,7 @@ region of intrest in specific layer.
 Read more: https://arxiv.org/abs/1610.02391
 
 ## Integrated Gradients
-![img.png](assets/MyPug2.png)
+![img.png](assets/IntegratedGradient.png)
 
 On this figure you can see Integrated Gradients method performed with the whole fine tuned resnet18 as a forward function.
 This method gives us more overall idea of what influenced model decision. Long story short ingradient gradient are an importance score for each
