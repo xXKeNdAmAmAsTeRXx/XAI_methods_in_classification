@@ -68,6 +68,8 @@ Read more: https://arxiv.org/abs/1311.2901
 **Agnostic** methods are these that could be used for any model architecture or even purpose.
 For this model we only need to mark specific features that could be used for fitting any explainable model or method.
 
+These methods are based on dividing image into superpixels - more about it in 
+[Intro to superpixels](https://github.com/xXKeNdAmAmAsTeRXx/GradCAM_for_ResNet_architecture/blob/cf69e90ecdf9131e2f35aeb2813da3b4b2dfd979/Intro_to_superpixels.ipynb).
 
 ## Shapley Values
 ![img.png](assets/shap.png)
