@@ -48,6 +48,7 @@ Read more: https://arxiv.org/abs/1703.01365
 
 ## InpurXGradient
 ![img.png](assets/ixg.png)
+
 It multiplies input with the gradient with respect to input. This method performed on the fine tuned resnet18
 provides a overall view how gradients values influence prediction result simpy multiplying input times gradients related with prediction.
 
