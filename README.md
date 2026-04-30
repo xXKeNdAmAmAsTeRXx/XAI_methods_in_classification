@@ -46,7 +46,7 @@ input pixel given by approximation of the integral of gradients of the model's o
 
 Read more: https://arxiv.org/abs/1703.01365
 
-## InpurXGradient
+## InputXGradient
 ![img.png](assets/ixg.png)
 
 It multiplies input with the gradient with respect to input. This method performed on the fine tuned resnet18
